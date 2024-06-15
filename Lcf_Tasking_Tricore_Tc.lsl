@@ -33,18 +33,18 @@
 
 /* Disable BMHD generation in tasking lsl */
 #define __BMHD_DISABLE_ALL__
-#define __BMHD0_CONFIG __BMHD_GENERATE
-#define __BMHD0_BMI   0x00FE
+#define __BMHD0_CONFIG     __BMHD_GENERATE
+#define __BMHD0_BMI        0x00FE
 
 /* Disable SCR location in tasking lsl */
 #define NOXC800INIT
 #define __DISABLE_SCR_BOOT_MAGIC
 
 /* Define the start address of user code */
-#define RESET                0xA00A0000
+#define RESET              0xA00A0000
 
-#define INTTAB          0x800B0000              /* start address of interrupt table */
-#define TRAPTAB         (INTTAB + 0xC000)      /* start address of trap table */
+#define INTTAB             0x800B0000             /* start address of interrupt table */
+#define TRAPTAB            (INTTAB + 0xC000)      /* start address of trap table */
 
 /* Include cpu.lsl for the definition of architecture, processor and derivative */
 #include "cpu.lsl"
@@ -60,7 +60,11 @@ section_layout :vtc:linear
         select "(.data|.data.*)";
         select "(.bss|.bss.*)";
     }
-    group ROM_DATA(ordered, align = 4, run_addr = mem:mpe:pflash0)
+    group HSM_ROM(ordered, align = 4, run_addr = mem:mpe:pflash0)
+    {
+        reserved "HSM_RESERVED"(size = 640K);
+    }
+    group TRICORE_ROM(ordered, align = 4, run_addr = mem:mpe:pflash0)
     {               
         select "table";
         select "(.data|.data.*)";

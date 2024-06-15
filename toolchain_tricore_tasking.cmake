@@ -1,7 +1,7 @@
 MESSAGE(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
-set(ignoreMe "${CMAKE_TOOLCHAIN_FILE}")
 if(CMAKE_TOOLCHAIN_FILE)
 endif()
+set(TOOLCHAIN_TRICORE_TASKING 1)
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(TOOLCHAIN_PATH "C:/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc")
@@ -23,7 +23,6 @@ set(CMAKE_C_FLAGS
 --default-near-size=0       \
 --misrac-mandatory-warnings \
 ")
-
 
 set(CMAKE_CXX_FLAGS
 "--c++11              \
@@ -65,6 +64,7 @@ set(CMAKE_CXX_LINK_FLAGS
 -o:SREC                               \
 -o:ELF                                \
 -d${LINKER_SCRIPT}")
+
 set(CMAKE_C_COMPILE_OBJECT "<CMAKE_C_COMPILER> <INCLUDES> ${CMAKE_C_FLAGS} -o <OBJECT> <SOURCE>")
 set(CMAKE_C_CREATE_STATIC_LIBRARY "${CMAKE_AR} -r <TARGET> <LINK_FLAGS> <OBJECTS>")
 set(CMAKE_C_LINK_EXECUTABLE "${CMAKE_LINKER} -o <TARGET> -c <TARGET>:BIN:0 <OBJECTS> <LINK_LIBRARIES> <CMAKE_C_LINK_FLAGS> <LINK_FLAGS>")
